@@ -9,3 +9,21 @@ task testNotifyRecurring(type: Exec) {
 	environment("WAIT_TIME_SECONDS", "5")
 	environment("NOTIFY_WAIT_TIME_SECONDS", "5")
 }
+
+task testNotifyRecurring2(type: Exec) {
+	workingDir "$projectDir"
+	commandLine "powershell", "-command", "import-module ./EyeApp.psm1; runScriptBlock { showNotificationRecurring2 }"
+	environment("WAIT_TIME_SECONDS", "10")
+	environment("NOTIFY_WAIT_TIME_SECONDS", "1")
+	environment("POLL_INTERVAL_SECONDS", "1")
+}
+
+task testOnLock(type: Exec) {
+	workingDir "$projectDir"
+	commandLine "powershell", "-command", "import-module ./EyeApp.psm1; onLock"
+}
+
+task testOnUnlock(type: Exec) {
+	workingDir "$projectDir"
+	commandLine "powershell", "-command", "import-module ./EyeApp.psm1; onUnlock"
+}
