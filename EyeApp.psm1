@@ -36,14 +36,20 @@ function showNotificationRecurring2 {
 		if (isLocked) {
 			if (-not ($wasLocked)) {
 				# if this is the first time we noticed we are locked we need to reset the poll timeout
-				write-host "Computer locked.  Resetting Timer."
-				$pollTime = get-date
-				$targetTime = $pollTime.AddSeconds($env:WAIT_TIME_SECONDS)
-				write-host "Next Notification after $($env:WAIT_TIME_SECONDS / 60) minute(s) at targetTime"
+				write-host "Computer locked.  Pausing Timer."
+				$wasLocked = $true
 			}
 		} else {
+			if ($wasLocked) {
+				write-host "Computer unlocked.  Resetting Timer."
+				$wasLocked = $false
+				$pollTime = get-date
+				$targetTime = $pollTime.AddSeconds($env:WAIT_TIME_SECONDS)
+				write-host "Next Notification after $($env:WAIT_TIME_SECONDS / 60) minute(s) at $targetTime"
+			}
+			
 			# we are unlocked, so keep counting
-			write-host "not locked...polling"
+			write-host "not locked...polling again after $env:POLL_INTERVAL_SECONDS"
 			$pollTime = $pollTime.AddSeconds($env:POLL_INTERVAL_SECONDS)
 		}
 		

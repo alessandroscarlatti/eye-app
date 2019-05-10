@@ -27,3 +27,12 @@ task testOnUnlock(type: Exec) {
 	workingDir "$projectDir"
 	commandLine "powershell", "-command", "import-module ./EyeApp.psm1; onUnlock"
 }
+
+task testApp(type: Exec) {
+	workingDir "$projectDir"
+	commandLine "cmd", "/c", "EyeApp.bat"
+	environment("DEBUG", "true")
+	environment("WAIT_TIME_SECONDS", "10")
+	environment("NOTIFY_WAIT_TIME_SECONDS", "1")
+	environment("POLL_INTERVAL_SECONDS", "1")
+}

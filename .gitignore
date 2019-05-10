@@ -1,2 +1,4 @@
 .gradle/
 log.txt
+sessionlog.txt
+LOCK
