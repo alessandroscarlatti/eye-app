@@ -1,0 +1,11 @@
+task testNotify(type: Exec) {
+	workingDir "$projectDir"
+	commandLine "powershell", "-command", "import-module ./EyeApp.psm1; runScriptBlock { showNotification }"
+}
+
+task testNotifyRecurring(type: Exec) {
+	workingDir "$projectDir"
+	commandLine "powershell", "-command", "import-module ./EyeApp.psm1; runScriptBlock { showNotificationRecurring }"
+	environment("WAIT_TIME_SECONDS", "5")
+	environment("NOTIFY_WAIT_TIME_SECONDS", "5")
+}
