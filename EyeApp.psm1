@@ -16,7 +16,7 @@ function showNotificationRecurring {
 	
 	while ($true) {
 		showNotification
-		write-host "Next Notification in $($env:WAIT_TIME_SECONDS / 60) minute(s)."
+		write-host "Next Notification in $($env:WAIT_TIME_SECONDS / 60) minute(s) at $((get-date).AddSeconds($env:WAIT_TIME_SECONDS))"
 		start-sleep -seconds $env:WAIT_TIME_SECONDS
 	}
 }
